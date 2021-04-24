@@ -1,0 +1,37 @@
+.peer {
+    margin-top: 25px;
+    margin-left: 10px;
+}
+
+.peerIcon {
+    width: 40px;
+    height: 40px;
+    font-size: 40px;
+    color: rgb(71, 135, 255);
+    transition: all 0.14s;
+}
+
+.toggleconnectIcon {
+    visibility: hidden;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    transform: translateY(-18px);
+    font-size: 20px;
+    background-color: white;
+    color: rgb(71, 135, 255);
+    border-radius: 360px;
+}
+
+.peerIcon:hover {
+    transform: scale(1.02);
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.192);
+    cursor: pointer;
+    transition: all 0.12s;
+}
+
+.peer:hover .toggleconnectIcon {
+    visibility: visible;
+    cursor: pointer;
+}
+

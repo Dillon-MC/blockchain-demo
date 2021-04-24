@@ -1,0 +1,7 @@
+.chain {
+    overflow-y: scroll;
+    width: 560px;
+    height: 80vh;
+    margin-top: 15vh;
+    text-align: center;
+}

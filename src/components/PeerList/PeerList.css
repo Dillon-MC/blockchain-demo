@@ -1,0 +1,10 @@
+.peerlist {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    height: 110px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.514);
+}

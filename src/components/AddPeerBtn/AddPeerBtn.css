@@ -1,0 +1,48 @@
+.addpeerbtn {
+    position: relative;
+    transform: translate(-260px, 350px);
+    width: 50px;
+    height: 50px;
+    margin-top: 100px;
+    border-radius: 360px;
+    outline: transparent;
+    background-color: white;
+    border-color: rgb(71, 135, 255);
+    color: rgb(71, 135, 255);
+    border-style: solid;
+    border-width: 3px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.14s;
+}
+
+.tooltip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    background-color: white;
+    color: rgb(71, 135, 255);
+    border-radius: 6px;
+    width: 60px;
+    height: 20px;
+    font-size: 10px;
+    font-weight: 100;
+    position: absolute;
+}
+
+.addpeerbtn:hover {
+    transform: scale(1.01) translate(-260px, 350px);
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.14s;
+}
+
+.addpeerbtn:hover .tooltip {
+    visibility: visible;
+    transform: translateY(-40px);
+    transition: all 0.14s;
+}
