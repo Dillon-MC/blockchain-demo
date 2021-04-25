@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/blockchain-demo/static/css/main.00912ad1.chunk.css",
+    "main.js": "/blockchain-demo/static/js/main.9d735268.chunk.js",
+    "main.js.map": "/blockchain-demo/static/js/main.9d735268.chunk.js.map",
+    "runtime-main.js": "/blockchain-demo/static/js/runtime-main.203cbc82.js",
+    "runtime-main.js.map": "/blockchain-demo/static/js/runtime-main.203cbc82.js.map",
+    "static/js/2.693fe52e.chunk.js": "/blockchain-demo/static/js/2.693fe52e.chunk.js",
+    "static/js/2.693fe52e.chunk.js.map": "/blockchain-demo/static/js/2.693fe52e.chunk.js.map",
+    "static/js/3.ef98243c.chunk.js": "/blockchain-demo/static/js/3.ef98243c.chunk.js",
+    "static/js/3.ef98243c.chunk.js.map": "/blockchain-demo/static/js/3.ef98243c.chunk.js.map",
+    "index.html": "/blockchain-demo/index.html",
+    "static/css/main.00912ad1.chunk.css.map": "/blockchain-demo/static/css/main.00912ad1.chunk.css.map",
+    "static/js/2.693fe52e.chunk.js.LICENSE.txt": "/blockchain-demo/static/js/2.693fe52e.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.203cbc82.js",
+    "static/js/2.693fe52e.chunk.js",
+    "static/css/main.00912ad1.chunk.css",
+    "static/js/main.9d735268.chunk.js"
+  ]
+}
