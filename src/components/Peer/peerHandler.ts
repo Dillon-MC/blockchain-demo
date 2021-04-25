@@ -1,5 +1,5 @@
 import { IBlockProps } from '../Block/Block';
-import { createHash } from '../AddBlockForm/createBlock';
+import { createHashASync } from '../AddBlockForm/createBlock';
 import {
     REQUEST_CHAIN,
     BLOCK
@@ -71,6 +71,12 @@ export const peerHandler = (index: number): IPeerHandler => {
         //grab this peers latest block
         let latestBlock = appContext.chains[index][appContext.chains[index].length-1];
         let newBlock = block;
+        if(newBlock.hash.slice(0,3) !== "000")
+            return;
+        if(newBlock.index > 0) {
+            if(newBlock.prevHash.slice(0,3) !== "000")
+                return;
+        }
         if(newBlock.index <= latestBlock.index) {
             // new block index is not greater than latest block, do nothing
             return;
@@ -98,8 +104,9 @@ export const peerHandler = (index: number): IPeerHandler => {
     const isChainValid = ({chain, appContext}: {chain: Array<IBlockProps>, appContext: IContextProps}): boolean => {
         // is the new chains genesis block valid
         let prevBlock = chain[0];
-        if(createHash(prevBlock) !== appContext.chains[index][0].hash) {
+        if(!isHashValid(appContext.chains[index][0].hash, prevBlock)) {
             // new chain genesis block is invalid, return false
+            console.log('invalid chain')
             return false;
         }
 
@@ -120,10 +127,15 @@ export const peerHandler = (index: number): IPeerHandler => {
         return true;
     }
 
+    const isHashValid = (hash: string, prevBlock: IBlockProps): boolean => {
+        let prevBlockHash = createHashASync(prevBlock);
+        return prevBlockHash === hash;
+    }
+
     const sendBlockToPeers = ({block, appContext, chain}: {block: IBlockProps, appContext: IContextProps, chain: Array<IBlockProps>}) => {
         _connectedPeers.forEach(p => {
             appContext.peers[p].processMessage({event: BLOCK, msg: { block, chain, appContext }});
-        })
+        });
     }
 
     return {

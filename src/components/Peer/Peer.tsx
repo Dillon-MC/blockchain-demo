@@ -31,7 +31,6 @@ const Peer = ({selectedPeer, peerIndex, selectPeer, setCurrentChain }: IPeerProp
     },[selectedPeer,shouldUpdate]);
 
     const setAsSelectedPeer = (): void => {
-        console.log(appContext.chains[index]);
         selectPeer(index);
         setCurrentChain(appContext.chains[index]);
     }
@@ -39,12 +38,12 @@ const Peer = ({selectedPeer, peerIndex, selectPeer, setCurrentChain }: IPeerProp
     return (
         <div className="peer" onClick={setAsSelectedPeer}>
             {!isSelectedPeer ? appContext.peers[index].getConnectedPeers().includes(selectedPeer) ? 
-                <span className="material-icons toggleconnectIcon" onClick={(e) => {
+                <span className="material-icons toggleconnectIcon" style={{color:'red'}} onClick={(e) => {
                     appContext.peers[index].disconnectPeer({ peer: selectedPeer, appContext });
                     update(shouldUpdate === 0 ? 1 : 0);
                     e.stopPropagation();
                 }}>
-                    link_off
+                    remove_circle
                 </span>
             :
                 <span onClick={(e) => {
@@ -52,7 +51,7 @@ const Peer = ({selectedPeer, peerIndex, selectPeer, setCurrentChain }: IPeerProp
                         update(shouldUpdate === 0 ? 1 : 0);
                         e.stopPropagation();
                     }} className="material-icons toggleconnectIcon">
-                    cable
+                    add_circle
                 </span>
             : null}
 

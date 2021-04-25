@@ -1,6 +1,7 @@
 .peer {
     margin-top: 25px;
     margin-left: 10px;
+    text-align: center;
 }
 
 .peerIcon {
@@ -17,10 +18,15 @@
     width: 20px;
     height: 20px;
     transform: translateY(-18px);
-    font-size: 20px;
+    font-size: 18px;
+    padding: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: white;
     color: rgb(71, 135, 255);
     border-radius: 360px;
+    z-index: 2;
 }
 
 .peerIcon:hover {
