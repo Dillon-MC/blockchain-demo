@@ -1,49 +1,25 @@
 import './App.css';
-import { createContext, useContext, useEffect } from 'react';
-import Block, { IBlockProps } from '../components/Block/Block';
+import { useEffect, lazy, Suspense } from 'react';
+import { IBlockProps } from '../components/Block/Block';
 import Chain from '../components/Chain/Chain';
 import Peer from '../components/Peer/Peer';
 import PeerList from '../components/PeerList/PeerList';
-import AddPeerBtn from '../components/AddPeerBtn/AddPeerBtn';
-import AddBlockForm from '../components/AddBlockForm/AddBlockForm';
-import { createBlock } from '../components/AddBlockForm/createBlock';
 import { useState } from 'react';
 import { peerHandler, IPeerHandler } from '../components/Peer/peerHandler';
+import { useAppContext, AppContext } from './Context';
+import { createBlock } from '../components/AddBlockForm/createBlock';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
-interface IContextProps {
-  refreshes: number,
-  peers: Array<IPeerHandler>,
-  chains: Array<Array<IBlockProps>>,
-  setRefreshes: Function,
-  setPeerChain: Function,
-  addBlockToChain: Function,
-  addChain: Function,
-  replaceChain: Function
-}
-
-const stateContext: IContextProps = {
-  refreshes: 0,
-  peers: [peerHandler(0)],
-  chains: [[]],
-  setRefreshes: (v: number): void => {},
-  setPeerChain: (peerIndex: number, chain: Array<IBlockProps>): void => {},
-  addBlockToChain: (peerIndex: number, block: IBlockProps): void => {},
-  addChain: (): void => {},
-  replaceChain: (chain: Array<IBlockProps>, newChain: Array<IBlockProps>): void => {}
-}
-
-const AppContext = createContext(stateContext);
-
-export const useAppContext = (): IContextProps => {
-  return useContext(AppContext);
-}
+const Block = lazy(() => import('../components/Block/Block'));
+const AddPeerBtn = lazy(() => import('../components/AddPeerBtn/AddPeerBtn'));
+const AddBlockForm = lazy(() => import('../components/AddBlockForm/AddBlockForm'));
 
 function App() {
   const [refreshes, setRefreshes] = useState<number>(useAppContext().refreshes);
 
   const createGenesisBlock = async (): Promise<IBlockProps> => {
     return createBlock({ index: 0, data: 'genesis block', prevBlock: null })
-    .then(block =>  block);
+    .then((block: IBlockProps) =>  block);
   }
 
   //when a peer adds a block to its chain, all connected peers will create a copy of that block to add to their own chain
@@ -102,12 +78,17 @@ function App() {
             return <Peer peerIndex={index} selectedPeer={selectedPeer} selectPeer={setSelectedPeer} setCurrentChain={setCurrentChain} key={`p${index}`} />
           })}
         </PeerList>
-        <AddBlockForm selectedPeer={selectedPeer}/>
+        <Suspense fallback={<Skeleton width={300} height={180} />}>
+          <AddBlockForm selectedPeer={selectedPeer}/>
+        </Suspense>
 
-        <AddPeerBtn addPeer={()=>{ addPeer([...peers, peerHandler(peers.length)]) }}/>
-
+        <Suspense fallback={<Skeleton width={50} height={50} />}>
+          <AddPeerBtn addPeer={()=>{ addPeer([...peers, peerHandler(peers.length)]) }}/>
+        </Suspense>
         <Chain>
-          {currentChain && currentChain.map(block => <Block blockData={block} selectedPeer={selectedPeer} key={block.index+selectedPeer}/>)}
+          <Suspense fallback={<Skeleton width={500} height={260} />}>
+            {currentChain && currentChain.map(block => <Block blockData={block} selectedPeer={selectedPeer} key={block.index+selectedPeer}/>)}
+          </Suspense>
         </Chain>
       </AppContext.Provider>
     </div>

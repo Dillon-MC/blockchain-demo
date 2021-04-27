@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './Peer.css';
-import { useAppContext } from '../../containers/App';
+import { useAppContext } from '../../containers/Context';
 import { uniqueNamesGenerator, Config, names } from 'unique-names-generator';
 
 const config: Config = {

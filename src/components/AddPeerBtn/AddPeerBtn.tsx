@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './AddPeerBtn.css';
-import { useAppContext } from '../../containers/App';
+import { useAppContext } from '../../containers/Context';
 
 const AddPeerBtn = ({addPeer}: {addPeer: Function}): JSX.Element => {
     const appContext = useAppContext();

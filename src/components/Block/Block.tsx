@@ -1,5 +1,5 @@
 import './Block.css';
-import { useAppContext } from '../../containers/App';
+import { useAppContext } from '../../containers/Context';
 import crypto from 'crypto';
 import { createHashSync } from '../AddBlockForm/createBlock';
 
